@@ -1,7 +1,8 @@
 import React from "react";
 import Footer from "./Footer";
-import Body from "./Body";
 import Header from "./header";
+import { Outlet } from "react-router-dom";
+
 
 // import  ReactDOM  from "react";
 
@@ -21,15 +22,24 @@ import Header from "./header";
 //procs => properties passed to components
 
 
+// Lazy Loading
+// Dynamic Import
+// Chunking
+// Code Splitting
+// On Demand Loading
+
+
 const AppLayout = () => {
   return (
       <>
         <Header></Header>
-        <Body></Body>
+
+        {/* <Body></Body> this should be dynamic*/}
+        <Outlet></Outlet>
+        
         <Footer></Footer>
       </>
   )
 }
-
 
 export default AppLayout;

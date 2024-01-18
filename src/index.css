@@ -59,6 +59,13 @@ code {
   padding-bottom: 20px;
 }
 
+
+.shimmer-card{
+  background-color: lightgray;
+  width: 300px;
+  height: 300px;
+  margin: 10px;
+}
 /* .res-card h4, h2{
   margin-left: 10px;
   margin-bottom: 10px;
@@ -91,6 +98,7 @@ code {
 
 .search{
   margin: 20px;
+  padding-left: 4rem;
 }
 
 
@@ -108,4 +116,13 @@ code {
   cursor: pointer;
   border: 1px solid black;
   ;
+}
+
+.restaurant-menu{
+  display: flex;
+
+}
+
+.menu-list{
+  margin: 50px;
 }
