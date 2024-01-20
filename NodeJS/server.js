@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
+const cors = require("cors");
 
 const path = require("path");
 
@@ -26,6 +27,8 @@ db.on("open", () => {
 
 
 app.use(bodyParser.json()); 
+
+app.use(cors());
 
 
 require(path.join(__dirname, "./routes/restaurants.routes"))(app);
