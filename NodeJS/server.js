@@ -9,8 +9,8 @@ const dbConfigs = require("./Restaurant-Project/config/db.config");
 
 const app = express();
 
-app.listen('8000', () => {
-    console.log("server is running on port 8000");
+app.listen("8000", () => {
+  console.log("server is running on port 8000");
 });
 
 mongoose.connect(dbConfigs.url);
@@ -18,24 +18,22 @@ mongoose.connect(dbConfigs.url);
 const db = mongoose.connection;
 
 db.on("error", () => {
-    console.log("Error in connecting DB");
+  console.log("Error in connecting DB");
 });
 
 db.on("open", () => {
-    console.log("Connection Successful");
+  console.log("Connection Successful");
 });
 
-
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 app.use(cors());
 
+require(path.join(__dirname, "./Restaurant-Project/routes/restaurants.routes"))(
+  app
+);
 
-require(path.join(__dirname, "./routes/restaurants.routes"))(app);
-
-require(path.join(__dirname, "./routes/users.routes"))(app);
-
-
+require(path.join(__dirname, "./Restaurant-Project/routes/users.routes"))(app);
 
 // const users = [
 //     {
@@ -71,7 +69,7 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 // });
 
 // app.get("/api/users/:id", (req, res) => {
-    
+
 //     const id = req.params.id;
 
 //     const user = users.find((user) => user.id == id);
@@ -85,7 +83,7 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 
 // //create a new user
 // app.post("/api/user", (req, res) => {
-    
+
 //     const name = req.body.name;
 //     const age = req.body.age;
 
@@ -141,10 +139,7 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 
 //     res.json(filteredUsers);
 
-
-
 // });
-
 
 // CRUD operations
 // HTTP methods
@@ -158,7 +153,6 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 // read   -> GET
 // update -> PUT or PATCH
 // delete -> DELETE
-
 
 // Database ---> helps us stores all the data
 // NodeJS(business logic) ---Mangoose--- MongoDb
@@ -186,8 +180,8 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 
 //     const newRestaurant = new Restaurant({
 //         name,
-//         cuisines, 
-//         starRating, 
+//         cuisines,
+//         starRating,
 //         imageUrl,
 //     });
 
@@ -221,11 +215,11 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 // // fetch restaurant with particular id
 
 // app.get("/api/restaurants/:id", (req, res) => {
-    
+
 //     var _id = req.params.id;
 
 //     Restaurant.findById(_id).then(data => {
-        
+
 //         if(!data){
 //             res.status(400).send({message : "Something went Wrong!"});
 //         }
@@ -249,14 +243,13 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 //             if(!data){
 //                 res.status(400).send({message : "Something went Wrong!"});
 //             }
-    
+
 //             res.send(data);
-    
+
 //             }).catch((err) => {
 //                 res.status(500).send({message : "Server not available"});
 //             });
 // });
-
 
 // // delete a restaurant by id
 
@@ -265,7 +258,7 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 //     var _id = req.params.id;
 
 //     Restaurant.findByIdAndDelete(_id).then(data => {
-        
+
 //         if(!data){
 //             res.status(400).send({message : "Something went Wrong!"});
 //         }
@@ -277,8 +270,4 @@ require(path.join(__dirname, "./routes/users.routes"))(app);
 //         });
 // });
 
-
 // design pattern
-
-
-
