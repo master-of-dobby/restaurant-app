@@ -1,7 +1,7 @@
 
 let accessToken;
 
-fetch("http://localhost:8000/api/login", {
+fetch("https://restaurant-project-rwmk.onrender.com/api/login", {
     method: "POST",
     headers: { 'Content-Type': 'application/json; charset=UTF-8',
  },
@@ -12,13 +12,14 @@ fetch("http://localhost:8000/api/login", {
 
 }).then(res => res.json())
 .then((data) => {
+    console.log(data);
     accessToken = data.accessToken;
-    localStorage.set('token', accessToken);
+    //localStorage.set('token', accessToken);
 });
 
-const token = localStorage.setItem("token");
+//const token = localStorage.setItem("token");
 
-console.log(token);
+//console.log(token);
 
 
 // f etch("http://localhost:8000/api/restaurants",{
