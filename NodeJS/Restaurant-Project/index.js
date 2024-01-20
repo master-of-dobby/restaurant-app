@@ -1,4 +1,7 @@
+const serverless = require("serverless-http");
 const express = require("express");
+const app = express();
+
 const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
 const cors = require("cors");
@@ -6,8 +9,6 @@ const cors = require("cors");
 const path = require("path");
 
 const dbConfigs = require("./Restaurant-Project/config/db.config");
-
-const app = express();
 
 app.listen('8000', () => {
     console.log("server is running on port 8000");
@@ -35,3 +36,6 @@ require(path.join(__dirname, "./routes/restaurants.routes"))(app);
 
 require(path.join(__dirname, "./routes/users.routes"))(app);
 
+
+
+module.exports.handler = serverless(app);
