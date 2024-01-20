@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const path = require("path");
 
-const dbConfigs = require("./config/db.config");
+const dbConfigs = require("./Restaurant-Project/config/db.config");
 
 const app = express();
 
