@@ -5,11 +5,12 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "./common/useOnlineStatus";
 import { filterData } from "./common/Helper";
+//import { useQuery } from "react-query";
 
 // React Hook ---> simple JS function
 
 export const Body = () => {
-  console.log("render");
+  //console.log("render");
 
   const [searchText, setSearchText] = useState("");
 
@@ -17,7 +18,7 @@ export const Body = () => {
 
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-  console.log("filteredRestaurants type:", typeof filteredRestaurants);
+  //console.log("filteredRestaurants type:", typeof filteredRestaurants);
 
   // let searchText = "navaash";
 
@@ -28,20 +29,41 @@ export const Body = () => {
     getRestaurants();
   }, []);
 
-  //useEffect take two params ---> callback function  dependency array
+  // const { isLoading, data, error } = useQuery({
+  //   queryKey: ["restaurants"],
+  //   queryFn: () => {
+  //     return fetch(
+  //       "https://restaurant-project-rwmk.onrender.com/api/restaurants"
+  //     ).then((res) => {
+  //       res.json().then((restaurants) => {
+  //         console.log(restaurants);
+  //         return restaurants;
+  //       });
+  //     });
+  //   },
+  // });
+
+  // setAllRestaurants(restaurants);
+  // setFilteredRestaurants(restaurants);
+
+  // console.log("isLoading", isLoading);
+  // console.log("Data ", data);
+  // console.log("Error ", error);
+
+  // useEffect take two params ---> callback function  dependency array
   // async
   function getRestaurants() {
     // setTimeout(() => {
 
     fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants", {
-      headers: {
-        Authoriztion:
-          "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWE5OWJlZTJkMzdkNjBmMmM2MThhNiIsImlhdCI6MTcwNTY5MTMzMH0.aX4dWQVApKYEyMK-fMqMLL7VVzmAHWBiDP46XAPJmUE",
-      },
+      // headers: {
+      //   Authoriztion:
+      //     "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWE5OWJlZTJkMzdkNjBmMmM2MThhNiIsImlhdCI6MTcwNTY5MTMzMH0.aX4dWQVApKYEyMK-fMqMLL7VVzmAHWBiDP46XAPJmUE",
+      // },
     })
       .then((res) => res.json())
       .then((restaurants) => {
-        console.log("API response : ", restaurants);
+        //console.log("API response : ", restaurants);
 
         // const data = restaurants;
 
@@ -64,32 +86,50 @@ export const Body = () => {
   ) : (
     <>
       <div className="Body">
-        <div className="search">
-          <input
-            type="text"
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder="search"
-            className="search"
-            value={searchText}
-          ></input>
-          <button
-            onClick={() => {
-              const data = filterData(searchText, allRestaurants);
+        <div className="top-restaurants-bar">
+          <div className="search">
+            <input
+              type="text"
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder="search"
+              className="search"
+              value={searchText}
+            ></input>
+            <button
+              onClick={() => {
+                const data = filterData(searchText, allRestaurants);
 
-              //console.log(data);
+                //console.log(data);
 
-              setFilteredRestaurants(data);
-            }}
-            className="search-btn"
-          >
-            Search
-          </button>
+                setFilteredRestaurants(data);
+              }}
+              className="search-btn"
+            >
+              Search
+            </button>
+          </div>
+
+          <div className="top-rated-restaurants">
+            <button
+              onClick={() => {
+                //Filter restaurants which have rating more than 4.2
+                const filteredRest = filteredRestaurants.filter(
+                  (restaurant) => restaurant.starRating > 4.2
+                );
+                //console.log("result : " + filteredRest);
+                setFilteredRestaurants(filteredRest);
+              }}
+            >
+              Top Rated Restaurants
+            </button>
+          </div>
         </div>
+
         <div className="res-container">
           {filteredRestaurants.map((restaurant) => {
             return (
-              <Link to={"restaurant/" + restaurant.id}>
-                <RestaurantCard key={restaurant.id} resDetails={restaurant} />
+              <Link to={"restaurant/" + restaurant._id}>
+                <RestaurantCard key={restaurant._id} resDetails={restaurant} />
               </Link>
             );
           })}
