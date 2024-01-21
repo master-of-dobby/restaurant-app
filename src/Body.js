@@ -30,14 +30,23 @@ export const Body = () => {
   }, []);
 
   //useEffect take two params ---> callback function  dependency array
+// async
+   function getRestaurants(){
 
-  async function getRestaurants(){
+    // setTimeout(() => {
+    //   const data = restaurants;
 
-    setTimeout(() => {
-      const data = restaurants;
-      setAllRestaurants(data);
-      setFilteredRestaurants(data);
-    }, 3000);
+      fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants").then((res) => 
+      
+      res.json()
+      ).then(restaurants =>  {
+          //console.log(restaurants)
+          setAllRestaurants(restaurants);
+          setFilteredRestaurants(restaurants);
+      })
+      .catch((err) => console.log(err));
+      
+    // }, 1000);
    
   }
 
