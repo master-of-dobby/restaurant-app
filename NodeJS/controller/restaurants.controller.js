@@ -1,7 +1,16 @@
-const RestaurantModel = require("../model/restaurant.model");
+const RestaurantModel = require("../Restaurant-Project/model/restaurant.model");
 
 exports.create = (req, res) => {
-  const { name, cuisines, starRating, imageUrl, locality, areaName, costForTwo, avgRating } = req.body;
+  const {
+    name,
+    cuisines,
+    starRating,
+    imageUrl,
+    locality,
+    areaName,
+    costForTwo,
+    avgRating,
+  } = req.body;
 
   const newRestaurant = new RestaurantModel({
     name,

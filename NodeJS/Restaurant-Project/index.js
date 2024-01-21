@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const path = require("path");
 
-const dbConfigs = require("../Restaurant-Project/config/db.config");
+const dbConfigs = require("../config/db.config");
 
 app.listen("8000", () => {
   console.log("server is running on port 8000");

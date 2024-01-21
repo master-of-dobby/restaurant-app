@@ -19,6 +19,8 @@ export const Body = () => {
 
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
+  console.log("filteredRestaurants type:", typeof filteredRestaurants);
+
 
   // let searchText = "navaash";
 
@@ -39,8 +41,11 @@ export const Body = () => {
       fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants").then((res) => 
       
       res.json()
-      ).then(restaurants =>  {
-          //console.log(restaurants)
+      ).then((restaurants) =>  {
+          // console.log("API response : " ,data.restaurants);
+
+          // const restaurants = data.restaurants;
+
           setAllRestaurants(restaurants);
           setFilteredRestaurants(restaurants);
       })
