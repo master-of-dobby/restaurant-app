@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-const Login = () => {
+const Login = (props) => {
   const [email, setIsEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [accessToken] = useState("");
+
+  console.log("props " + props);
 
   function loginUser(e) {
     //console.log(e);
@@ -20,6 +22,9 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.message === "email not found") {
+            props.isLoginMethod(false);
+        }
         //accessToken = data.accessToken;
       })
       .catch((err) => {

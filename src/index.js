@@ -12,12 +12,17 @@ import Instamart from "./Instamart";
 import AppLayout from "./App";
 import Login from "./Login";
 
-const loggedIn = false;
+var loggedIn = false;
+
+function setIsLoggedIn(value){
+  console.log("value : " , value);
+  loggedIn = value;
+}
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: loggedIn ? <AppLayout /> : <Login />,
+    element: loggedIn ? <AppLayout /> : <Login isLoginMethod = {setIsLoggedIn}/>,
     errorElement: <Error />,
     children: [
       {
