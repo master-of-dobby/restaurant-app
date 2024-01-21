@@ -6,13 +6,11 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "./common/useOnlineStatus";
 import { filterData } from "./common/Helper";
 
-
 // React Hook ---> simple JS function
 
 export const Body = () => {
-
   console.log("render");
-  
+
   const [searchText, setSearchText] = useState("");
 
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -20,7 +18,6 @@ export const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   console.log("filteredRestaurants type:", typeof filteredRestaurants);
-
 
   // let searchText = "navaash";
 
@@ -32,70 +29,74 @@ export const Body = () => {
   }, []);
 
   //useEffect take two params ---> callback function  dependency array
-// async
-function getRestaurants(){
-
+  // async
+  function getRestaurants() {
     // setTimeout(() => {
 
-      fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants")
-      .then((res) => 
-      res.json()
-      ).then((restaurants) =>  {
-          console.log("API response : " , restaurants);
+    fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants", {
+      headers: {
+        Authoriztion:
+          "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWE5OWJlZTJkMzdkNjBmMmM2MThhNiIsImlhdCI6MTcwNTY5MTMzMH0.aX4dWQVApKYEyMK-fMqMLL7VVzmAHWBiDP46XAPJmUE",
+      },
+    })
+      .then((res) => res.json())
+      .then((restaurants) => {
+        console.log("API response : ", restaurants);
 
-         // const data = restaurants;
+        // const data = restaurants;
 
-          setAllRestaurants(restaurants);
-          setFilteredRestaurants(restaurants);
+        setAllRestaurants(restaurants);
+        setFilteredRestaurants(restaurants);
       })
       .catch((err) => console.log(err));
-      
+
     // }, 1000);
-   
   }
 
-    const isOnline = useOnlineStatus();
+  const isOnline = useOnlineStatus();
 
-    if(!isOnline){
-      return <h1>Offline :() Please Check your Internet Connection!</h1>
-    }
+  if (!isOnline) {
+    return <h1>Offline :() Please Check your Internet Connection!</h1>;
+  }
 
-    return filteredRestaurants.length === 0 ? 
-    (<Shimmer/>)
-    : (
-      <>
-        <div className="Body">
-          <div className="search">
-            <input type="text" 
-                onChange={ (e) => setSearchText(e.target.value)}
-                placeholder="search" 
-                className="search"
-                value={searchText}
-              ></input>
-            <button onClick = { () => {
-                const data = filterData(searchText, allRestaurants);
+  return filteredRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
+    <>
+      <div className="Body">
+        <div className="search">
+          <input
+            type="text"
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="search"
+            className="search"
+            value={searchText}
+          ></input>
+          <button
+            onClick={() => {
+              const data = filterData(searchText, allRestaurants);
 
-                //console.log(data);
+              //console.log(data);
 
-                setFilteredRestaurants (data);
-
-            }} className="search-btn">Search</button>
-          </div>
-          <div className="res-container">
-            {
-              filteredRestaurants.map((restaurant => {
-                return (
-                  <Link to={"restaurant/" + restaurant.id}>
-                      <RestaurantCard key={restaurant.id} resDetails = {restaurant} />
-                  </Link>
-                );
-              }
-              ))
-            }
-          </div>
+              setFilteredRestaurants(data);
+            }}
+            className="search-btn"
+          >
+            Search
+          </button>
         </div>
-      </>
-    )
-  }
+        <div className="res-container">
+          {filteredRestaurants.map((restaurant) => {
+            return (
+              <Link to={"restaurant/" + restaurant.id}>
+                <RestaurantCard key={restaurant.id} resDetails={restaurant} />
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+};
 
-  export default Body;
+export default Body;
