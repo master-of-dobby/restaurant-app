@@ -1,4 +1,4 @@
-const RestaurantModel = require("../Restaurant-Project/model/restaurant.model");
+const RestaurantModel = require("../model/restaurant.model");
 
 exports.create = (req, res) => {
   const {

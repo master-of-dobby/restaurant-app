@@ -29,11 +29,10 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-require(path.join(__dirname, "./Restaurant-Project/routes/restaurants.routes"))(
-  app
-);
+//require("./routes/users.routes")
+require(path.join(__dirname, "./routes/restaurants.routes"))(app);
 
-require(path.join(__dirname, "./Restaurant-Project/routes/users.routes"))(app);
+require(path.join(__dirname, "./routes/users.routes"))(app);
 
 // const users = [
 //     {

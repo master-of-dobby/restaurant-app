@@ -6,7 +6,7 @@ module.exports = (app) => {
   app.post("/api/restaurants", restaurantController.create);
 
   //fetch --> //jwtAuth
-  app.get("/api/restaurants", jwtAuth, restaurantController.fetch);
+  app.get("/api/restaurants", restaurantController.fetch);
 
   // fetch restaurant with particular id
   app.get("/api/restaurants/:id", restaurantController.fetchOne);

@@ -33,18 +33,17 @@ export const Body = () => {
 
   //useEffect take two params ---> callback function  dependency array
 // async
-   function getRestaurants(){
+function getRestaurants(){
 
     // setTimeout(() => {
-    //   const data = restaurants;
 
-      fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants").then((res) => 
-      
+      fetch("https://restaurant-project-rwmk.onrender.com/api/restaurants")
+      .then((res) => 
       res.json()
       ).then((restaurants) =>  {
-          // console.log("API response : " ,data.restaurants);
+          console.log("API response : " , restaurants);
 
-          // const restaurants = data.restaurants;
+         // const data = restaurants;
 
           setAllRestaurants(restaurants);
           setFilteredRestaurants(restaurants);
