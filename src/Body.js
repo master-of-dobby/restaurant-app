@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
-import restaurants from "./common/mockData";
+//import restaurants from "./common/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
