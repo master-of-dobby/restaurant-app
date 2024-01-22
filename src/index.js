@@ -10,27 +10,50 @@ import Body from "./Body";
 import RestaurantMenu from "./RestaurantMenu";
 import Instamart from "./Instamart";
 import AppLayout from "./App";
-import Login from "./Login";
+import Cart from "./Cart";
+//import Login from "./Login";
+//import { Navigate } from "react-router-dom";
+// import useFetch from "./useFetch";
 
-var loggedIn = false;
+//var loggedIn = false;
 
-function setIsLoggedIn(value){
-  console.log("value : " , value);
-  loggedIn = value;
-}
+// function setIsLoggedIn(email, password) {
+//   // console.log("value : ", value);
+//   // loggedIn = value;
+
+//   const [loggedIn, setIsLoggedIn] = loggedIn(email, password);
+
+//   return loggedIn;
+// }
+
+//console.log(loggedIn);
+
+// const Protected = ({ isLoggedIn, children }) => {
+//   // Check if the user is logged in
+//   //const isLoggedIn = /* logic to check if the user is logged in */;
+
+//   // If logged in, render the children (protected content)
+//   // Otherwise, redirect to the login page
+//   //console.log("is loggedIn " , isLoggedIn);
+
+//   return isLoggedIn ? children : <Navigate to="/" />;
+// };
+
+//const Instamart = lazy(() => import("./Instamart"));
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: loggedIn ? <AppLayout /> : <Login isLoginMethod = {setIsLoggedIn}/>,
+    element: <AppLayout />,
     errorElement: <Error />,
     children: [
       {
-        path: "/about",
+        path: "about",
         element: <About />,
       },
+
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />,
       },
       {
@@ -38,16 +61,37 @@ const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path: "/restaurant/:id",
+        path: "restaurant/:id",
         element: <RestaurantMenu />,
       },
       {
-        path: "/instamart",
+        path: "instamart",
         element: <Instamart />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
 ]);
+
+
+//   {
+//     path: "/app",
+//     element: (
+//       // <Protected>
+//       //   {" "}
+//       <AppLayout />
+//       //   {" "}
+//       // </Protected>
+//     ),
+//     errorElement: <Error />,
+//     children: [
+
+//     ],
+//   },
+// ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

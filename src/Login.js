@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+//import useFetch from "./useFetch";
 
 const Login = (props) => {
+  console.log("props ", props);
+  const navigate = useNavigate();
   const [email, setIsEmail] = useState("");
   const [password, setPassword] = useState("");
+
   //const [accessToken] = useState("");
 
-  console.log("props " + props);
+  //console.log("props " + props);
 
   function loginUser(e) {
     //console.log(e);
@@ -22,23 +27,28 @@ const Login = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.message === "email not found") {
-            props.isLoginMethod(false);
+        if (
+          data.message === "email not found!" ||
+          data.message === "Invalid Password"
+        ) {
+          props.isLoginMethod(false);
+          alert("Invalid Credentials");
+        } else {
+          console.log("Logged in User");
+
+          console.log("email : ", email);
+          console.log("password : ", password);
+
+          navigate("/");
+          console.log("Loggin successfull!");
+          props.isLoginMethod(true);
+          // return <Navigate replace to="/app" />;
         }
         //accessToken = data.accessToken;
       })
       .catch((err) => {
         alert(err);
       });
-
-    // fetch("https://restaurant-project-rwmk.onrender.com/api/login", {
-    //     method: 'POST',
-    // });
-
-    //  console.log("Logged in User");
-
-    //  console.log("email : ", email);
-    //  console.log("password : ", password);
   }
 
   return (
@@ -63,7 +73,10 @@ const Login = (props) => {
           ></input>
           <br />
           <br />
-          <button onClick={(e) => loginUser(e)} type="submit">
+          <button
+            onClick={(e) => loginUser(e)}
+            type="submit"
+          >
             Submit
           </button>
         </form>
