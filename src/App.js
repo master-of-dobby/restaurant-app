@@ -4,6 +4,30 @@ import Header from "./header";
 import { Outlet } from "react-router-dom";
 //import { QueryClient, QueryClientProvider } from "react-query";
 import Login from "./Login";
+
+const AppLayout = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function setIsLoggedIn(value) {
+    setLoggedIn(value);
+  }
+
+  return !loggedIn ? (
+    <Login isLoginMethod={setIsLoggedIn}></Login>
+  ) : (
+    <>
+      <div className="app">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default AppLayout;
+
+
 //import Body from "./Body";
 
 // import  ReactDOM  from "react";
@@ -30,25 +54,3 @@ import Login from "./Login";
 // On Demand Loading
 
 //const queryClient = new QueryClient();
-
-const AppLayout = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  function setIsLoggedIn(value) {
-    setLoggedIn(value);
-  }
-
-  return !loggedIn ? (
-    <Login isLoginMethod={setIsLoggedIn}></Login>
-  ) : (
-    <>
-      <div className="app">
-        <Header />
-        <Outlet />
-        <Footer />
-      </div>
-    </>
-  );
-};
-
-export default AppLayout;
