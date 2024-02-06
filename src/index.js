@@ -11,6 +11,8 @@ import RestaurantMenu from "./RestaurantMenu";
 import Instamart from "./Instamart";
 import AppLayout from "./App";
 import Cart from "./Cart";
+import {HashRouter as Router} from "react-router-dom";
+
 //import Login from "./Login";
 //import { Navigate } from "react-router-dom";
 // import useFetch from "./useFetch";
@@ -95,11 +97,14 @@ const appRouter = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
+    <Router>
+    <App />
+  </Router>
+  // <React.StrictMode>
+  //   {/* <App /> */}
 
-    <RouterProvider router={appRouter}></RouterProvider>
-  </React.StrictMode>
+  //   <RouterProvider router={appRouter}></RouterProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
